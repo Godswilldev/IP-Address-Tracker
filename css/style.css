@@ -99,7 +99,7 @@ body {
     color: #fff; }
     @media only screen and (max-width: 60em) {
       .hero .heading {
-        margin-top: 10rem; } }
+        margin-top: 7rem; } }
     .hero .heading .ip-address {
       padding-left: 3rem;
       color: #969696;
@@ -132,7 +132,8 @@ body {
     padding-right: 0; }
     @media only screen and (max-width: 85em) {
       .hero .results {
-        width: 90vw; } }
+        width: 90vw;
+        padding: 2rem 0; } }
     @media only screen and (max-width: 60em) {
       .hero .results {
         width: 70vw;
@@ -148,14 +149,21 @@ body {
         .hero .results .result {
           padding: 0;
           text-align: center;
-          border: none; } }
+          border: none;
+          margin-bottom: 2rem; } }
       .hero .results .result__title {
         color: #969696;
         font-size: 2rem;
         margin-bottom: 1.5rem; }
+        @media only screen and (max-width: 60em) {
+          .hero .results .result__title {
+            margin-bottom: 1rem; } }
       .hero .results .result__value {
         color: #2b2b2b;
         font-size: 3rem; }
         @media only screen and (max-width: 85em) {
           .hero .results .result__value {
             font-size: 2.5rem; } }
+        @media only screen and (max-width: 60em) {
+          .hero .results .result__value {
+            font-size: 3rem; } }

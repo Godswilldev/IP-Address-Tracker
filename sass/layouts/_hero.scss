@@ -22,7 +22,7 @@
         text-align: center;
         color: #fff;
         @include respond(tab-port) {
-            margin-top: 10rem;
+            margin-top: 7rem;
         }
 
         .ip-address {
@@ -66,6 +66,7 @@
         padding-right: 0;
         @include respond(tab-land) {
             width: 90vw;
+            padding: 2rem 0;
         }
         @include respond(tab-port) {
             width: 70vw;
@@ -85,11 +86,15 @@
                 padding: 0;
                 text-align: center;
                 border: none;
+                margin-bottom: 2rem;
             }
             &__title {
                 color: $Dark-Gray;
                 font-size: 2rem;
                 margin-bottom: 1.5rem;
+                @include respond(tab-port) {
+                    margin-bottom: 1rem;
+                }
             }
             &__value {
                 color: $Very-Dark-Gray;
@@ -97,6 +102,9 @@
 
                 @include respond(tab-land) {
                     font-size: 2.5rem;
+                }
+                @include respond(tab-port) {
+                    font-size: 3rem;
                 }
             }
         }
