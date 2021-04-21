@@ -1,0 +1,18 @@
+.heading {
+    &__primary {
+        font-size: 5rem;
+        font-weight: 700;
+    }
+}
+
+.paragraph {
+    color: $Dark-Gray;
+    &__primary {
+        font-weight: 500;
+        font-size: 3rem;
+    }
+    &__secondary {
+        font-weight: 400;
+        font-size: 2rem;
+    }
+}
