@@ -1,0 +1,104 @@
+.body {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 40% 1fr;
+}
+
+.map {
+    // background-color: red;
+}
+
+.hero {
+    background-image: url(../images/pattern-bg.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .heading {
+        margin: 2rem auto;
+        margin-top: 4rem;
+        text-align: center;
+        color: #fff;
+        @include respond(tab-port) {
+            margin-top: 10rem;
+        }
+
+        .ip-address {
+            padding-left: 3rem;
+            color: $Dark-Gray;
+            font-size: 2.5rem;
+            width: 60rem;
+            height: 6.4rem;
+            outline: none;
+            border: none;
+            border-top-left-radius: 2rem;
+            border-bottom-left-radius: 2rem;
+            margin-top: 2rem;
+            margin-right: -0.2rem;
+            &::placeholder {
+                font-size: 2rem;
+                color: $Dark-Gray;
+            }
+
+            @include respond(tab-port) {
+                width: 60%;
+            }
+        }
+    }
+
+    .results {
+        width: 70vw;
+        // height: 100%;
+        background-color: #fff;
+        margin: 0 auto;
+        position: relative;
+        bottom: -4rem;
+        border-radius: 2rem;
+        box-shadow: 0.5rem 0.5rem 1rem rgba(#000, $alpha: 0.5);
+
+        // display: flex;
+        // justify-content: space-between;
+        display: grid;
+        grid-template-columns: repeat(4, 25%);
+        padding: 5rem;
+        padding-right: 0;
+        @include respond(tab-land) {
+            width: 90vw;
+        }
+        @include respond(tab-port) {
+            width: 70vw;
+            grid-template-rows: 1fr;
+            grid-template-columns: 1fr;
+            br {
+                display: none;
+            }
+        }
+
+        .result {
+            padding-left: 3rem;
+            &:not(:last-child) {
+                border-right: 1px solid $Dark-Gray;
+            }
+            @include respond(tab-port) {
+                padding: 0;
+                text-align: center;
+                border: none;
+            }
+            &__title {
+                color: $Dark-Gray;
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+            }
+            &__value {
+                color: $Very-Dark-Gray;
+                font-size: 3rem;
+
+                @include respond(tab-land) {
+                    font-size: 2.5rem;
+                }
+            }
+        }
+    }
+}

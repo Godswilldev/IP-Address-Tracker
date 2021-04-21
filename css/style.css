@@ -1,4 +1,21 @@
 /*
+0 - 600px:      Phone
+600 - 900px:    Tablet portrait
+900 - 1200px:   Tablet landscape
+[1200 - 1800] is where our normal styles apply
+1800px + :      Big desktop
+
+$breakpoint arguement choices:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+ORDER: Base + typography > general layout + grid > page layout > components
+
+1em = 16px
+*/
+/*
  IP Address Tracker Search for any IP address or domain IP Address Location
     Timezone UTC
     <!-- add offset value dynamically using the API -->
@@ -14,6 +31,18 @@
 
 html {
   font-size: 62.5%; }
+  @media only screen and (max-width: 85em) {
+    html {
+      font-size: 58%; } }
+  @media only screen and (max-width: 60em) {
+    html {
+      font-size: 53%; } }
+  @media only screen and (max-width: 37.5em) {
+    html {
+      font-size: 48%; } }
+  @media only screen and (max-width: 30em) {
+    html {
+      font-size: 45%; } }
 
 body {
   box-sizing: border-box;
@@ -21,6 +50,10 @@ body {
 
 .heading__primary {
   font-size: 5rem;
+  font-weight: 700; }
+
+.heading__secondary {
+  font-size: 3rem;
   font-weight: 700; }
 
 .paragraph {
@@ -34,6 +67,7 @@ body {
 
 .btn {
   cursor: pointer;
+  transition: 0.5s all;
   border: 0;
   outline: 0;
   background-color: #2b2b2b;
@@ -42,6 +76,86 @@ body {
   border-bottom-right-radius: 2rem;
   box-shadow: 0.3rem 0.3rem 1rem rgba(0, 0, 0, 0.5); }
   .btn:active {
-    transform: scale(0.95); }
+    transform: scale(1.1); }
   .btn:hover {
     opacity: 0.8; }
+
+.body {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 40% 1fr; }
+
+.hero {
+  background-image: url(../images/pattern-bg.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; }
+  .hero .heading {
+    margin: 2rem auto;
+    margin-top: 4rem;
+    text-align: center;
+    color: #fff; }
+    @media only screen and (max-width: 60em) {
+      .hero .heading {
+        margin-top: 10rem; } }
+    .hero .heading .ip-address {
+      padding-left: 3rem;
+      color: #969696;
+      font-size: 2.5rem;
+      width: 60rem;
+      height: 6.4rem;
+      outline: none;
+      border: none;
+      border-top-left-radius: 2rem;
+      border-bottom-left-radius: 2rem;
+      margin-top: 2rem;
+      margin-right: -0.2rem; }
+      .hero .heading .ip-address::placeholder {
+        font-size: 2rem;
+        color: #969696; }
+      @media only screen and (max-width: 60em) {
+        .hero .heading .ip-address {
+          width: 60%; } }
+  .hero .results {
+    width: 70vw;
+    background-color: #fff;
+    margin: 0 auto;
+    position: relative;
+    bottom: -4rem;
+    border-radius: 2rem;
+    box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.5);
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    padding: 5rem;
+    padding-right: 0; }
+    @media only screen and (max-width: 85em) {
+      .hero .results {
+        width: 90vw; } }
+    @media only screen and (max-width: 60em) {
+      .hero .results {
+        width: 70vw;
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr; }
+        .hero .results br {
+          display: none; } }
+    .hero .results .result {
+      padding-left: 3rem; }
+      .hero .results .result:not(:last-child) {
+        border-right: 1px solid #969696; }
+      @media only screen and (max-width: 60em) {
+        .hero .results .result {
+          padding: 0;
+          text-align: center;
+          border: none; } }
+      .hero .results .result__title {
+        color: #969696;
+        font-size: 2rem;
+        margin-bottom: 1.5rem; }
+      .hero .results .result__value {
+        color: #2b2b2b;
+        font-size: 3rem; }
+        @media only screen and (max-width: 85em) {
+          .hero .results .result__value {
+            font-size: 2.5rem; } }

@@ -1,5 +1,6 @@
 .btn {
     cursor: pointer;
+    transition: 0.5s all;
     border: 0;
     outline: 0;
     background-color: $Very-Dark-Gray;
@@ -8,7 +9,7 @@
     border-bottom-right-radius: 2rem;
     box-shadow: 0.3rem 0.3rem 1rem rgba($color: #000000, $alpha: 0.5);
     &:active {
-        transform: scale(0.95);
+        transform: scale(1.1);
     }
     &:hover {
         opacity: 0.8;
