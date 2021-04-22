@@ -12,6 +12,8 @@ navigator.geolocation.getCurrentPosition(
     const { latitude: lat } = position.coords;
     const { longitude: lng } = position.coords;
     let coords = [lat, lng];
+    const loc = `https://www.google.com/maps/@${lat},${lng}`;
+    console.log(coords);
 
     var map = L.map("map").setView(coords, 7);
 
@@ -20,6 +22,19 @@ navigator.geolocation.getCurrentPosition(
     }).addTo(map);
 
     L.marker(coords).addTo(map);
+
+    const apiKey = `pk.ab463a62a6fadeb5b2036f2d0edf7ab6`;
+    const locationIq = ` https://eu1.locationiq.com/v1/reverse.php?key=${apiKey}&lat=${lat}&lon=${lng}&format=json`;
+
+    (async function getCorrectLocation() {
+      try {
+        const { data: location } = await axios.get(locationIq);
+        console.log(location.display_name);
+        locationHtml.textContent = location.display_name;
+      } catch (error) {
+        console.log(error);
+      }
+    })();
   },
   () => {
     console.log("couldn't get location");
@@ -42,7 +57,6 @@ const ipAddressUrl = "https://ipinfo.io/json?token=f958fc223af431";
     const { city, country, lat, lng, region, timezone } = ipdetails.location;
 
     IpAddresshtml.textContent = IpAddressGotten.ip;
-    locationHtml.innerHTML = `<h1 class="heading__secondary result__value location">${city} <br /> ${region}, <br />${country}</h1>`;
     timezoneHtml.textContent = timezone;
     ispHtml.textContent = ipdetails.isp;
   } catch (error) {
