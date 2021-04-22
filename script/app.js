@@ -94,5 +94,6 @@ form.addEventListener("submit", (e) => {
       container._leaflet_id = null;
       displayMap(lat, lng);
     }
+    document.querySelector(".ip-address").value = "";
   })();
 });
