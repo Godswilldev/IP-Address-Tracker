@@ -4,6 +4,24 @@ const locationHtml = document.querySelector(".location");
 const timezoneHtml = document.querySelector(".timezone");
 const ispHtml = document.querySelector(".isp");
 
+const addLoadingIcon = () => {
+  document.querySelector("#loader").style.display = "block";
+  document.querySelector("#loader").style.opacity = 1;
+  document.querySelector("#loader").style.visibility = "visible";
+  document.querySelector(".loading").style.display = "block";
+  document.querySelector(".loading").style.opacity = 1;
+  document.querySelector(".loading").style.visibility = "visible";
+};
+
+const removeLoadingIcon = () => {
+  document.querySelector("#loader").style.display = "none";
+  document.querySelector("#loader").style.opacity = 0;
+  document.querySelector("#loader").style.visibility = "hidden";
+  document.querySelector(".loading").style.display = "none";
+  document.querySelector(".loading").style.opacity = 0;
+  document.querySelector(".loading").style.visibility = "hidden";
+};
+
 ////////////// getting the location of the user to display the map
 ////////////////////////////////////////////////////////////////////
 
@@ -25,6 +43,7 @@ const displayMap = (lat, lng) => {
 
 navigator.geolocation.getCurrentPosition(
   (position) => {
+    addLoadingIcon();
     const { latitude: lat } = position.coords;
     const { longitude: lng } = position.coords;
     let coords = [lat, lng];
@@ -38,8 +57,10 @@ navigator.geolocation.getCurrentPosition(
       try {
         const { data: location } = await axios.get(locationIq);
         locationHtml.textContent = location.display_name;
+        removeLoadingIcon();
       } catch (error) {
         console.log(error);
+        removeLoadingIcon();
       }
     })();
   },
@@ -75,25 +96,40 @@ const ipAddressUrl = "https://ipinfo.io/json?token=f958fc223af431";
 //handling form submission event
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  const ipAddressInput = document.querySelector(".ip-address").value;
-  const geoIpAddess = `https://geo.ipify.org/api/v1?apiKey=${geoIpifyApiKey}&ipAddress=${ipAddressInput}`;
-  (async function fetchGeoLocation() {
-    const { data } = await axios.get(geoIpAddess);
-    const { ip, isp } = data;
-    const { city, country, lat, lng, region, timezone } = data.location;
-    IpAddresshtml.textContent = ip;
-    timezoneHtml.textContent = timezone;
-    ispHtml.textContent = isp;
-    locationHtml.textContent = `${city} ${region}, ${country}`;
+  const ipAddressInput = document.querySelector(".ip-address").value.trim();
 
-    ///////////////////////////
-    ///update the map
-    //////////////////////////
-    var container = L.DomUtil.get("map");
-    if (container != null) {
-      container._leaflet_id = null;
-      displayMap(lat, lng);
-    }
-    document.querySelector(".ip-address").value = "";
-  })();
+  if (ipAddressInput === "") {
+    alert("Enter a valid Ip address");
+  } else {
+    const geoIpAddess = `https://geo.ipify.org/api/v1?apiKey=${geoIpifyApiKey}&ipAddress=${ipAddressInput}`;
+
+    (async function fetchGeoLocation() {
+      addLoadingIcon();
+      try {
+        const { data } = await axios.get(geoIpAddess);
+
+        const { ip, isp } = data;
+        const { city, country, lat, lng, region, timezone } = data.location;
+        IpAddresshtml.textContent = ip;
+        timezoneHtml.textContent = timezone;
+        ispHtml.textContent = isp;
+        locationHtml.textContent = `${city} ${region}, ${country}`;
+
+        ///////////////////////////
+        ///update the map
+        //////////////////////////
+        var container = L.DomUtil.get("map");
+        if (container != null) {
+          container._leaflet_id = null;
+          displayMap(lat, lng);
+        }
+        document.querySelector(".ip-address").value = "";
+        removeLoadingIcon();
+      } catch (error) {
+        alert("Invalid Ip Address");
+        document.querySelector(".ip-address").value = "";
+        removeLoadingIcon();
+      }
+    })();
+  }
 });
