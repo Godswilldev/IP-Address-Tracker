@@ -49,6 +49,7 @@
     }
 
     .results {
+        z-index: 999;
         width: 70vw;
         // height: 100%;
         background-color: #fff;
@@ -78,6 +79,7 @@
         }
 
         .result {
+            z-index: 99;
             padding-left: 3rem;
             &:not(:last-child) {
                 border-right: 1px solid $Dark-Gray;
@@ -86,6 +88,7 @@
                 padding: 0;
                 text-align: center;
                 border: none;
+                border: 0;
                 margin-bottom: 2rem;
             }
             &__title {

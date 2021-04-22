@@ -119,6 +119,7 @@ body {
         .hero .heading .ip-address {
           width: 60%; } }
   .hero .results {
+    z-index: 999;
     width: 70vw;
     background-color: #fff;
     margin: 0 auto;
@@ -142,6 +143,7 @@ body {
         .hero .results br {
           display: none; } }
     .hero .results .result {
+      z-index: 99;
       padding-left: 3rem; }
       .hero .results .result:not(:last-child) {
         border-right: 1px solid #969696; }
@@ -150,6 +152,7 @@ body {
           padding: 0;
           text-align: center;
           border: none;
+          border: 0;
           margin-bottom: 2rem; } }
       .hero .results .result__title {
         color: #969696;

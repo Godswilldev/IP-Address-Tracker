@@ -9,6 +9,8 @@ const timezoneHtml = document.querySelector(".timezone");
 const ispHtml = document.querySelector(".isp");
 
 const ipAddressUrl = "https://api.ipify.org?format=json";
+
+///////////////////getting the Ip address on page load and displaying it
 (async function getIpAddress() {
   try {
     const { data: IpAddressGotten } = await axios.get(ipAddressUrl);
@@ -30,3 +32,27 @@ const ipAddressUrl = "https://api.ipify.org?format=json";
     console.log(error);
   }
 })();
+
+////////////// getting the location of the user to display the map
+////////////////////////////////////////////////////////////////////
+
+navigator.geolocation.getCurrentPosition(
+  (position) => {
+    const { latitude: lat } = position.coords;
+    const { longitude: lng } = position.coords;
+    console.log(`https://www.google.com/maps/@${lat},${lng}`);
+    let coords = [lat, lng];
+    console.log(lat, lng);
+
+    var map = L.map("map").setView(coords, 7);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
+      attribution: "&copy;Greg",
+    }).addTo(map);
+
+    L.marker(coords).addTo(map);
+  },
+  () => {
+    console.log("couldn't get location");
+  }
+);
