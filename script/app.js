@@ -8,7 +8,14 @@ const ispHtml = document.querySelector(".isp");
 ////////////////////////////////////////////////////////////////////
 
 const displayMap = (lat, lng) => {
-  let map = L.map("map").setView([lat, lng], 8);
+  // let map = L.map("map").setView([lat, lng], 8);
+  var map = L.map("map", {
+    center: [lat, lng],
+    zoom: 8,
+    dragging: true,
+    doubleClickZoom: true,
+    zoomDelta: 8.5,
+  });
   L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
     attribution: "&copy;Greg",
   }).addTo(map);
@@ -23,14 +30,6 @@ navigator.geolocation.getCurrentPosition(
     let coords = [lat, lng];
     const loc = `https://www.google.com/maps/@${lat},${lng}`;
     displayMap(lat, lng);
-
-    // let map = L.map("map").setView(coords, 8);
-
-    // L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
-    //   attribution: "&copy;Greg",
-    // }).addTo(map);
-
-    // L.marker(coords).addTo(map);
 
     const apiKey = `pk.ab463a62a6fadeb5b2036f2d0edf7ab6`;
     const locationIq = ` https://eu1.locationiq.com/v1/reverse.php?key=${apiKey}&lat=${lat}&lon=${lng}&format=json`;
@@ -82,7 +81,6 @@ form.addEventListener("submit", (e) => {
     const { data } = await axios.get(geoIpAddess);
     const { ip, isp } = data;
     const { city, country, lat, lng, region, timezone } = data.location;
-    console.log(ip, isp, city, country, lat, lng, region, timezone);
     IpAddresshtml.textContent = ip;
     timezoneHtml.textContent = timezone;
     ispHtml.textContent = isp;
@@ -94,7 +92,7 @@ form.addEventListener("submit", (e) => {
     var container = L.DomUtil.get("map");
     if (container != null) {
       container._leaflet_id = null;
+      displayMap(lat, lng);
     }
-    displayMap(lat, lng);
   })();
 });
